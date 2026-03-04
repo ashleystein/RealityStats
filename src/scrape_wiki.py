@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import date
 import pandas as pd
-from utils import clean_strings
+from utils import clean_strings, remove_leading_chars
 from src import aws
 
 # from html_form_to_dict import html_form_to_dict as html2dict
@@ -21,12 +21,17 @@ def scrapePage(url):
         print('Error occurred while getting the page, ' + Exception)
 
 
-def get_html(url, file_name):
-    file = f"{file_name}_{dt}"
+def save_wiki_html(url, file_name):
+    file = f"./html_files/{file_name}_{dt}"
+    #  check if it already exists
+
     soup = scrapePage(url)
     text = soup.find_all('table', class_="wikitable sortable")
     with open(file, "w") as f:
         f.write(str(text))
+    print(f'saved to {file}')
+
+    return file
 
 
 def saveToCsv(df, csv_name):
@@ -76,7 +81,14 @@ def extract_to_csv(html_file, csv_file):
     df = pd.DataFrame(vals)
     df.to_csv(csv_file, index=False)
 
+def get_not_scraped_url():
+    df = pd.read_csv('./data/wiki_urls.csv', dtype=str)
+    scraping = df[df['scraped'] != 'TRUE'][:1][['show', 'season', 'url']]
+    return scraping.values[0][0], scraping.values[0][1], scraping.values[0][2]
 
-get_html('https://en.wikipedia.org/wiki/The_Bachelorette_(American_TV_series)_season_21', 'bachelorette_s21')
-#extract_to_csv('html_files/bachelorette_s21', 'traitors_us_s4_2026-02-25.csv')
-#get_secret('agent_for_wiki_scraping')
+
+show, season, scraping_url = get_not_scraped_url()
+show_name = remove_leading_chars(show, 'the')
+file_name = f"{show_name}_{str(season)}"
+html_file = save_wiki_html(scraping_url, file_name)
+extract_to_csv(html_file=html_file, csv_file=file_name)

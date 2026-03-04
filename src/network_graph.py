@@ -110,6 +110,21 @@ class NetworkGraph:
                     }
                 ]
             ),
+            html.Div([
+                html.Label("Filter by Show:"),
+                dcc.Dropdown(
+                    id='dept-dropdown',
+                    options=[
+                        {'label': 'Season', 'value': 'all'},
+                        {'label': 'Engineering', 'value': 'Engineering'},
+                        {'label': 'Design', 'value': 'Design'},
+                        {'label': 'Executive', 'value': 'Executive'}
+                    ],
+                    value='all',
+                    clearable=False,
+                    style={'width': '300px'}
+                ),
+            ], style={'marginBottom': '20px'}),
             html.Div(id='node-data-display', style={'marginTop': '20px', 'fontSize': '1.2em', 'color': '#555'})
         ])
         return app
@@ -131,6 +146,7 @@ if __name__ == '__main__':
     bach_nd = []
     bach_ed = []
     bach_df = pd.read_csv('./data/reality_contestants.csv')
+
 
     contestant_list = bach_df['name'].tolist()
     show_list = bach_df['show'].tolist()
