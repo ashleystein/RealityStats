@@ -1,8 +1,12 @@
 import re
 
-def clean_strings(raw_string):
+# String cleaning
+def clean_strings(raw_string, type=''):
     str_clean =  raw_string.text.replace('\n', '')
-    return re.sub(r'^[^a-zA-Z]+|[^a-zA-Z]+$', '', str_clean)
+    if type == 'age':
+        return str_clean
+    else:
+        return re.sub(r'^[^a-zA-Z]+|[^a-zA-Z]+$', '', str_clean)
 
 def remove_leading_chars(orig_str, remove_char):
     text = orig_str.lower()

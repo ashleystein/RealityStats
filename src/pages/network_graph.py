@@ -33,8 +33,8 @@ class NetworkGraph:
 
     def render_app(self):
         # 3. Initialize the Dash app
-        app = dash.Dash(__name__)
-        app.layout = html.Div([
+        #app = dash.Dash(__name__, use_pages=True)
+        layout = html.Div([
             html.H1("Reality TV Network Visualization"),
             cyto.Cytoscape(
                 id='cytoscape-graph',
@@ -127,42 +127,31 @@ class NetworkGraph:
             ], style={'marginBottom': '20px'}),
             html.Div(id='node-data-display', style={'marginTop': '20px', 'fontSize': '1.2em', 'color': '#555'})
         ])
-        return app
+
+        return layout
 
 
 
-if __name__ == '__main__':
-    # traitors_us_s4_2026-02-25
-    # df = pd.read_csv('traitors_us_s4_2026-02-25.csv')
-    # nd = df['name'].tolist()
-    # ed = []
-    # for x in nd:
-    #     tup = (x, "Traitors_US_S4")
-    #     ed.append(tup)
-    #
-    # ng_traitors_us4 = NetworkGraph(nd, ed)
+#if __name__ == '__main__':
+dash.register_page(__name__)
+bach_nd = []
+bach_ed = []
+bach_df = pd.read_csv('../data/reality_contestants.csv')
+contestant_list = bach_df['name'].tolist()
+show_list = bach_df['show'].tolist()
 
-    # bachelor
-    bach_nd = []
-    bach_ed = []
-    bach_df = pd.read_csv('./data/reality_contestants.csv')
+for x in contestant_list:
+    dic = {'data': {'id': x, 'label': x, 'type': 'contestant'}}
+    bach_nd.append(dic)
+for x in list(set(show_list)):
+    dic = {'data': {'id': x, 'label': x, 'type': 'show'}}
+    bach_nd.append(dic)
 
+for index, row in bach_df.iterrows():
+    tup = (row['name'], row['show'])
+    bach_ed.append(tup)
+bach_ng = NetworkGraph(bach_nd, bach_ed)
+#dash.register_page(__name__)
+network_layout = bach_ng.render_app()
+layout = network_layout
 
-    contestant_list = bach_df['name'].tolist()
-    show_list = bach_df['show'].tolist()
-
-    for x in contestant_list:
-        dic = {'data': {'id': x, 'label': x, 'type': 'contestant'}}
-        bach_nd.append(dic)
-    for x in list(set(show_list)):
-        dic = {'data': {'id': x, 'label': x, 'type': 'show'}}
-        bach_nd.append(dic)
-
-    for index, row in bach_df.iterrows():
-        tup = (row['name'], row['show'])
-        bach_ed.append(tup)
-    bach_ng = NetworkGraph(bach_nd, bach_ed)
-
-    app = bach_ng.render_app()
-
-    app.run()
