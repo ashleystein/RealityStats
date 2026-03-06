@@ -1,0 +1,7 @@
+[32m2026-03-05 11:35:19 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ac7c136d-d688-43b5-bbc8-b3a8f852e5d0 - 41517 - LOGS_CAPTURED - Started capturing logs in process (pid: 41517).
+[32m2026-03-05 11:35:19 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ac7c136d-d688-43b5-bbc8-b3a8f852e5d0 - 41517 - get_not_scraped_url - STEP_START - Started execution of step "get_not_scraped_url".
+[32m2026-03-05 11:35:19 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ac7c136d-d688-43b5-bbc8-b3a8f852e5d0 - 41517 - get_not_scraped_url - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+[32m2026-03-05 11:35:19 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ac7c136d-d688-43b5-bbc8-b3a8f852e5d0 - get_not_scraped_url - Writing file at: /Users/ashilys/Desktop/RealityStats/.tmp_dagster_home_4iy9jf46/storage/get_not_scraped_url using PickledObjectFilesystemIOManager...
+[32m2026-03-05 11:35:19 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ac7c136d-d688-43b5-bbc8-b3a8f852e5d0 - 41517 - get_not_scraped_url - ASSET_MATERIALIZATION - Materialized value get_not_scraped_url.
+[32m2026-03-05 11:35:19 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ac7c136d-d688-43b5-bbc8-b3a8f852e5d0 - 41517 - get_not_scraped_url - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2026-03-05 11:35:19 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ac7c136d-d688-43b5-bbc8-b3a8f852e5d0 - 41517 - get_not_scraped_url - STEP_SUCCESS - Finished execution of step "get_not_scraped_url" in 61ms.

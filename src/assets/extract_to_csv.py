@@ -62,5 +62,5 @@ def extract_to_csv(save_wiki_html):
                            'place': place}
                     vals.append(dic)
     df = pd.DataFrame(vals)
-    df.to_csv(csv_file, mode="a", index=False)
+    df.to_csv(csv_file, mode="a", header=False, index=False)
     return {"csv_file": csv_file, "show": show, "season": season}

@@ -1,5 +1,6 @@
 import re
-
+from pathlib import Path
+from datetime import datetime
 # String cleaning
 def clean_strings(raw_string, type=''):
     str_clean =  raw_string.text.replace('\n', '')
@@ -12,3 +13,15 @@ def remove_leading_chars(orig_str, remove_char):
     text = orig_str.lower()
     new_text = text.lstrip(remove_char)
     return new_text.strip()
+
+def does_file_exist(file_name):
+    return Path(file_name).is_file()
+def get_last_modified_time(file):
+
+    file_path = Path(file)
+
+    # Get the timestamp
+    timestamp = file_path.stat().st_mtime
+
+    return timestamp
+
